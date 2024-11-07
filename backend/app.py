@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify # type: ignore
 from routes.submission import submission_blueprint
 import requests
 from bs4 import BeautifulSoup

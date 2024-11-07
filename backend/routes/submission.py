@@ -1,5 +1,6 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify # type: ignore
 from scraping.scraping import fetch_content
+from generate_qna.generate import generate_qna
 
 submission_blueprint = Blueprint('submission', __name__)
 
@@ -10,6 +11,8 @@ def submit_url():
     title, headings, paragraphs = fetch_content(url)
     if title and headings and paragraphs:
         content = " ".join([title] + headings + paragraphs)
-        return content
+        qna = generate_qna(content)
+        print(qna)
+        return qna
     else:
         return jsonify({"error": "Content could not be fetched or is restricted"}), 400
