@@ -11,7 +11,7 @@ def submit_url():
     title, headings, paragraphs = fetch_content(url)
     if title and headings and paragraphs:
         content = " ".join([title] + headings + paragraphs)
-        qna = generate_qna(content)
-        return qna
+        question_bank = generate_qna(content)
+        return str(question_bank)
     else:
         return jsonify({"error": "Content could not be fetched or is restricted"}), 400
