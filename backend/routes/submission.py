@@ -10,9 +10,11 @@ def add_question(question, choices):
         "choices": choices
     }
 
-@submission_blueprint.route('/submit')
+@submission_blueprint.route('/submit_url', methods=['POST'])
 def submit_url():
     #url = request.json.get('url')
+    #data = request.json
+    #user_input = data.get('user_input', '')
     q_list = []
     url = 'https://www.apple.com/ca/store?afid=p238%7CshFROjR3i-dc_mtid_1870765e38482_pcrid_719207693017_pgrid_165151408209_pntwk_g_pchan__pexid__ptid_kwd-10778630_&cid=aos-us-kwgo---slid---product-'
     title, headings, paragraphs = fetch_content(url)

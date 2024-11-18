@@ -51,7 +51,7 @@ def generate_qna(content):
     messages = [
         {
             "role": "system", 
-            "content": "generates questions and multiple-choice options that help categorize users visiting the site"
+            "content": "generates 5 questions and multiple-choice options that help categorize users visiting the site"
         }
     ]
     messages.append(draft_url(content))
