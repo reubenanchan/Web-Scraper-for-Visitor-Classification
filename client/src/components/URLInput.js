@@ -1,10 +1,29 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Form, Input } from "semantic-ui-react";
+import { setQNA } from "../redux/reducers/actions";
+import { useDispatch, useSelector } from "react-redux";
 
 const URLInput = () => {
   const [url, setURL] = useState("");
-  const [qna, setQNA] = useState([]);
+  const qna = useSelector((state) => state.qna.qna);
+  const dispatch = useDispatch();
+
+  const handleSubmit = async () => {
+    console.log(url);
+    axios
+      .post("/submit_url", {
+        url: url,
+      })
+      .then(function (response) {
+        console.log(response);
+        console.log(response.data);
+        dispatch(setQNA(response.data));
+      })
+      .catch(function (error) {
+        console.error("Error:", error);
+      });
+  };
 
   return (
     <Form>
@@ -16,27 +35,11 @@ const URLInput = () => {
             value={url}
             onChange={(e) => setURL(e.target.value)}
           />
-          <button
-            class="ui button"
-            onClick={async () => {
-              console.log(url);
-              axios
-                .post("/submit_url", setQNA)
-                .then(function (response) {
-                  console.log(response);
-                  console.log(response.data);
-                  setQNA(response.data);
-                })
-                .catch(function (error) {
-                  console.error("Error:", error);
-                });
-            }}
-          >
+          <button class="ui button" onClick={handleSubmit}>
             Search
           </button>
         </div>
       </Form.Field>
-      <pre>{JSON.stringify(qna, null, 2)}</pre>
     </Form>
   );
 };
