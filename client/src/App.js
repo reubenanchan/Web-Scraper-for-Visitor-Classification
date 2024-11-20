@@ -2,22 +2,10 @@ import React from "react";
 import URLInput from "./components/URLInput";
 import ValidationForm from "./components/ValidationForm";
 import { Container, Header, Loader } from "semantic-ui-react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 const App = () => {
-  const qna = useSelector((state) => state.qna.qna);
   const isLoading = useSelector((state) => state.isLoading);
-
-  /*
-  useEffect(() => {
-    fetch("/test").then((response) =>
-      response.json().then((data) => {
-        setQNA(data);
-      })
-    );
-  }, []);
-  */
-  //console.log(qna);
 
   return (
     <div className="">

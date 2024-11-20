@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Form, Input } from "semantic-ui-react";
+import { Form } from "semantic-ui-react";
 import { setQNA, startLoading, stopLoading } from "../redux/reducers/actions";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 const URLInput = () => {
   const [url, setURL] = useState("");
-  //const qna = useSelector((state) => state.qna.qna);
   const dispatch = useDispatch();
 
   const handleSubmit = async () => {
