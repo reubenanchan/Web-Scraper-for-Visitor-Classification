@@ -1,4 +1,4 @@
-import { SET_QNA } from "./actions";
+import { SET_QNA, RESET_QNA } from "./actions";
 
 const initialState = {
   qna: [],
@@ -11,6 +11,8 @@ const qnaReducer = (state = initialState, action) => {
         ...state,
         qna: action.payload,
       };
+    case RESET_QNA:
+      return initialState;
     default:
       return state;
   }

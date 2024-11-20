@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Form, Input } from "semantic-ui-react";
-import { setQNA } from "../redux/reducers/actions";
+import { setQNA, startLoading, stopLoading } from "../redux/reducers/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 const URLInput = () => {
   const [url, setURL] = useState("");
-  const qna = useSelector((state) => state.qna.qna);
+  //const qna = useSelector((state) => state.qna.qna);
   const dispatch = useDispatch();
 
   const handleSubmit = async () => {
     console.log(url);
+    dispatch(startLoading());
     axios
       .post("/submit_url", {
         url: url,
@@ -22,6 +23,9 @@ const URLInput = () => {
       })
       .catch(function (error) {
         console.error("Error:", error);
+      })
+      .finally(function () {
+        dispatch(stopLoading());
       });
   };
 

@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from "react";
-import Counter from "./components/counter";
+import React from "react";
 import URLInput from "./components/URLInput";
 import ValidationForm from "./components/ValidationForm";
-import { Container, Header } from "semantic-ui-react";
-import { setQNA } from "./redux/reducers/actions";
+import { Container, Header, Loader } from "semantic-ui-react";
 import { useDispatch, useSelector } from "react-redux";
 
 const App = () => {
-  const dispatch = useDispatch();
   const qna = useSelector((state) => state.qna.qna);
+  const isLoading = useSelector((state) => state.isLoading);
 
   /*
   useEffect(() => {
@@ -27,12 +25,22 @@ const App = () => {
         <Header as="h1" textAlign="center">
           Web Scraper for Visitor Classification
         </Header>
+        <p style={{ textAlign: "center" }}>
+          Provide a URL to automatically create tailored questions and
+          multiple-choice options to categorize site visitors.
+        </p>
       </Container>
       <Container style={{ marginTop: 40 }}>
         <URLInput />
       </Container>
       <Container style={{ marginTop: 40 }}>
-        <ValidationForm qna={qna} />
+        {isLoading ? (
+          <Loader active inline="centered" />
+        ) : (
+          <>
+            <ValidationForm />
+          </>
+        )}
       </Container>
     </div>
   );
