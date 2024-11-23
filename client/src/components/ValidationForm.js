@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, Checkbox, Form, FormField, Header } from "semantic-ui-react";
 import { resetQNA } from "../redux/reducers/actions";
 import { useSelector, useDispatch } from "react-redux";
+import axios from "axios";
 
 const ValidationForm = () => {
   const qna = useSelector((state) => state.qna.qna.questions);
@@ -29,7 +30,17 @@ const ValidationForm = () => {
       url: url,
       responses: formattedResponses,
     };
-
+    /*
+    axios
+      .post("/database", { title: title })
+      .then(function (response) {
+        console.log(response);
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.error("Error:", error);
+      });
+    */
     console.log("Formatted Responses:", outputForm);
     alert("Thank you! Your responses have been submitted.");
     setResponses({});
